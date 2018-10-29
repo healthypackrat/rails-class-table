@@ -6,7 +6,7 @@ RailsのAPIドキュメントにあるクラスの概要
 
 # デモ
 
-  * ...
+  * <https://healthypackrat.github.io/rails-class-table/>
       * ヘッダをクリックしてソートできます
       * クラス名でフィルタリングできます
 
