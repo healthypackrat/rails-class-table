@@ -1,0 +1,7 @@
+body {
+  padding-top: 1rem;
+}
+
+tbody td {
+  word-break: break-all;
+}
