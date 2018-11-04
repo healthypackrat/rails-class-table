@@ -9,7 +9,7 @@ Vue.component('demo-grid', {
   data: function () {
     return {
       sortIndex: 1,
-      sortOrders: this.columns.map(_ => -1),
+      sortOrders: this.columns.map(c => c.initialSortOrder),
       mutableData: this.data.slice()
     };
   },
@@ -35,8 +35,10 @@ Vue.component('demo-grid', {
   },
   methods: {
     sortBy: function (index) {
+      const sortIndex = this.sortIndex;
+      const sortOrder = index === sortIndex ? -1 : 1;
       this.sortIndex = index;
-      this.$set(this.sortOrders, index, this.sortOrders[index] * -1);
+      this.$set(this.sortOrders, index, this.sortOrders[index] * sortOrder);
     },
     filterData: function () {
       const filterKey = this.filterKey && this.filterKey.toLowerCase();
@@ -57,10 +59,10 @@ const demo = new Vue({
   data: {
     searchQuery: '',
     gridColumns: [
-      'クラス名',
-      'クラス概要',
-      'メソッド数',
-      'メソッド概要'
+      { label: 'クラス名', initialSortOrder: 1 },
+      { label: 'クラス概要', initialSortOrder: -1 },
+      { label: 'メソッド数', initialSortOrder: -1 },
+      { label: 'メソッド概要', initialSortOrder: -1 }
     ],
     gridData: entries.map(entry => {
       return [

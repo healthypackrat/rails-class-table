@@ -11,10 +11,10 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th v-for="(name, index) in columns"
+            <th v-for="(column, index) in columns"
               @click="sortBy(index)"
               :class="[{ 'table-info': sortIndex === index }, sortOrders[index] > 0 ? 'dropup' : 'dropdown']">
-              {{ name }}
+              {{ column.label }}
               <span class="dropdown-toggle"></span>
             </th>
           </tr>
