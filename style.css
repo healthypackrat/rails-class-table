@@ -5,3 +5,9 @@ body {
 tbody td {
   word-break: break-all;
 }
+
+@media (min-width: 768px) {
+  th {
+    min-width: 8em;
+  }
+}
