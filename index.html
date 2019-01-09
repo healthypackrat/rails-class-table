@@ -13,7 +13,7 @@
           <tr>
             <th v-for="(column, index) in columns"
               @click="sortBy(index)"
-              :class="[{ 'table-info': sortIndex === index }, sortOrders[index] > 0 ? 'dropup' : 'dropdown']">
+              :class="tableHeaderClassNames(index)">
               {{ column.label }}
               <span class="dropdown-toggle"></span>
             </th>

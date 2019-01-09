@@ -50,6 +50,12 @@ Vue.component('demo-grid', {
       } else {
         this.mutableData = this.data.slice();
       }
+    },
+    tableHeaderClassNames: function (index) {
+      return [
+        { 'table-info': this.sortIndex === index },
+        this.sortOrders[index] > 0 ? 'dropup' : 'dropdown'
+      ];
     }
   }
 });
