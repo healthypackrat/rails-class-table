@@ -8,30 +8,33 @@
   </head>
   <body>
     <script type="text/x-template" id="grid-template">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th v-for="(column, index) in columns"
-              @click="sortBy(index)"
-              :class="tableHeaderClassNames(index)">
-              {{ column.label }}
-              <span class="dropdown-toggle"></span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in sortedData">
-            <td v-for="cell in row">
-              <template v-if="cell.href">
-                <a target="_blank" :href="cell.href">{{ cell.value }}</a>
-              </template>
-              <template v-else>
-                {{ cell.value }}
-              </template>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <p>{{ sortedData.length }} 件の結果</p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th v-for="(column, index) in columns"
+                @click="sortBy(index)"
+                :class="tableHeaderClassNames(index)">
+                {{ column.label }}
+                <span class="dropdown-toggle"></span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in sortedData">
+              <td v-for="cell in row">
+                <template v-if="cell.href">
+                  <a target="_blank" :href="cell.href">{{ cell.value }}</a>
+                </template>
+                <template v-else>
+                  {{ cell.value }}
+                </template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </script>
 
     <div class="container">
