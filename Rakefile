@@ -11,7 +11,7 @@ end
 
 base_dir = Pathname.new(__dir__)
 
-doc_dir = base_dir.join('v5.2.1')
+doc_dir = base_dir.join('v5.2.2')
 
 task :default => :build_js
 
