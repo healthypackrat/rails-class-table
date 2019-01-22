@@ -51,9 +51,9 @@ Vue.component('demo-grid', {
         this.mutableData = this.data.slice();
       }
     },
-    tableHeaderClassNames: function (index) {
+    tableHeaderClassNames: function (column, index) {
       return [
-        { 'table-info': this.sortIndex === index },
+        { 'table-info': this.sortIndex === index, 'text-right': column.isNumber },
         this.sortOrders[index] > 0 ? 'dropup' : 'dropdown'
       ];
     }
@@ -66,9 +66,9 @@ const demo = new Vue({
     searchQuery: '',
     gridColumns: [
       { label: 'クラス名', initialSortOrder: 1 },
-      { label: 'クラス概要', initialSortOrder: -1 },
-      { label: 'メソッド数', initialSortOrder: -1 },
-      { label: 'メソッド概要', initialSortOrder: -1 }
+      { label: 'クラス概要', initialSortOrder: -1, isNumber: true },
+      { label: 'メソッド数', initialSortOrder: -1, isNumber: true },
+      { label: 'メソッド概要', initialSortOrder: -1, isNumber: true }
     ],
     gridData: entries.map(entry => {
       return [

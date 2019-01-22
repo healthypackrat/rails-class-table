@@ -15,7 +15,7 @@
             <tr>
               <th v-for="(column, index) in columns"
                 @click="sortBy(index)"
-                :class="tableHeaderClassNames(index)">
+                :class="tableHeaderClassNames(column, index)">
                 {{ column.label }}
                 <span class="dropdown-toggle"></span>
               </th>
@@ -23,7 +23,7 @@
           </thead>
           <tbody>
             <tr v-for="row in sortedData">
-              <td v-for="cell in row">
+              <td v-for="cell in row" :class="{ 'text-right': typeof(cell.value) === 'number' }">
                 <template v-if="cell.href">
                   <a target="_blank" :href="cell.href">{{ cell.value }}</a>
                 </template>
