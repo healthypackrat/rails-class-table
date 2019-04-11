@@ -11,17 +11,19 @@ end
 
 base_dir = Pathname.new(__dir__)
 
-doc_dir = base_dir.join('v5.2.2')
+tmp_dir = base_dir.join('tmp')
+
+doc_dir = tmp_dir.join(File.read('RAILS_VERSION').chomp)
 
 task :default => :build_js
 
 task :build_js => 'entries.js'
 
-file 'entries.js' do |t|
+file 'entries.js' => 'RAILS_VERSION' do |t|
   entries = doc_dir.glob('classes/**/*.html').map do |html_path|
     entry = {
       class_name: nil,
-      path: html_path.relative_path_from(base_dir).to_s,
+      path: html_path.relative_path_from(tmp_dir).to_s,
       total_chars_of_class_description: 0,
       total_chars_of_method_descriptions: 0,
       number_of_methods: 0
