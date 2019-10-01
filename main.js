@@ -71,8 +71,9 @@ const demo = new Vue({
       { label: 'メソッド概要', initialSortOrder: -1, isNumber: true }
     ],
     gridData: entries.map(entry => {
+      const noDoc = entry.total_chars_of_class_description === 0 && entry.total_chars_of_method_descriptions === 0;
       return [
-        { value: entry.class_name, href: `https://api.rubyonrails.org/${entry.path}` },
+        { value: entry.class_name, href: `https://api.rubyonrails.org/${entry.path}`, noDoc: noDoc },
         { value: entry.total_chars_of_class_description },
         { value: entry.number_of_methods },
         { value: entry.total_chars_of_method_descriptions }

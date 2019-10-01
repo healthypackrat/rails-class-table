@@ -25,7 +25,7 @@
             <tr v-for="row in sortedData">
               <td v-for="cell in row" :class="{ 'text-right': typeof(cell.value) === 'number' }">
                 <template v-if="cell.href">
-                  <a target="_blank" :href="cell.href">{{ cell.value }}</a>
+                  <a target="_blank" :href="cell.href" :class="{ 'text-secondary': cell.noDoc }">{{ cell.value }}</a>
                 </template>
                 <template v-else>
                   {{ cell.value }}
