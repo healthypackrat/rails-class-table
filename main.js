@@ -4,7 +4,8 @@ Vue.component('demo-grid', {
   props: {
     data: Array,
     columns: Array,
-    filterKey: String
+    filterKey: String,
+    hideNoDoc: Boolean
   },
   data: function () {
     return {
@@ -28,10 +29,14 @@ Vue.component('demo-grid', {
   watch: {
     filterKey: function () {
       this.debouncedFilterData();
+    },
+    hideNoDoc: function () {
+      this.filterData();
     }
   },
   created: function () {
     this.debouncedFilterData = _.debounce(this.filterData, 500);
+    this.filterData();
   },
   methods: {
     sortBy: function (index) {
@@ -50,6 +55,14 @@ Vue.component('demo-grid', {
       } else {
         this.mutableData = this.data.slice();
       }
+
+      this.mutableData = this.mutableData.filter(row => {
+        if (this.hideNoDoc) {
+          return row[0].noDoc ? false : true;
+        } else {
+          return true;
+        }
+      });
     },
     tableHeaderClassNames: function (column, index) {
       return [
@@ -64,6 +77,7 @@ const demo = new Vue({
   el: '#demo',
   data: {
     searchQuery: '',
+    hideNoDoc: true,
     gridColumns: [
       { label: 'クラス名', initialSortOrder: 1 },
       { label: 'クラス概要', initialSortOrder: -1, isNumber: true },

@@ -43,15 +43,22 @@
       </p>
 
       <div id="demo">
-        <form id="search" v-on:submit.prevent>
+        <form v-on:submit.prevent>
           <div class="form-group">
-            <input name="query" v-model="searchQuery" placeholder="クラス名でフィルタ..." class="form-control">
+            <input type="text" placeholder="クラス名でフィルタ..." class="form-control" v-model="searchQuery">
+          </div>
+          <div class="form-check form-group">
+            <input class="form-check-input" type="checkbox" id="hideNoDoc" v-model="hideNoDoc">
+            <label class="form-check-label" for="hideNoDoc">
+              ドキュメントが書かれていないクラスを隠す
+            </label>
           </div>
         </form>
         <demo-grid
           :data="gridData"
           :columns="gridColumns"
-          :filter-key="searchQuery">
+          :filter-key="searchQuery"
+          :hide-no-doc="hideNoDoc">
         </demo-grid>
       </div>
     </div>
