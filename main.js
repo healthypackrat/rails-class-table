@@ -93,5 +93,16 @@ const demo = new Vue({
         { value: entry.total_chars_of_method_descriptions }
       ];
     })
+  },
+  created: function () {
+    this.searchQuery = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
+    this.debouncedSetSearchQuery = _.debounce(() => {
+      location.hash = encodeURIComponent(this.searchQuery);
+    }, 500);
+  },
+  watch: {
+    searchQuery: function () {
+      this.debouncedSetSearchQuery();
+    }
   }
 });
