@@ -18,11 +18,20 @@ Vue.component('demo-grid', {
     sortedData: function () {
       const sortIndex = this.sortIndex;
       const order = this.sortOrders[sortIndex];
+      const sortPriorities = this.columns[sortIndex].sortPriorities;
 
       return this.mutableData.slice().sort((a, b) => {
-        a = a[sortIndex].value;
-        b = b[sortIndex].value;
-        return (a === b ? 0 : a > b ? 1 : -1) * order;
+        for (let i = 0; i < sortPriorities.length; i++) {
+          const j = sortPriorities[i];
+          const x = a[j].value;
+          const y = b[j].value;
+          if (x < y) {
+            return -1 * order;
+          } else if (x > y) {
+            return 1 * order;
+          }
+        }
+        return 0;
       });
     }
   },
@@ -79,10 +88,10 @@ const demo = new Vue({
     searchQuery: '',
     hideNoDoc: true,
     gridColumns: [
-      { label: 'クラス名', initialSortOrder: 1 },
-      { label: 'クラス概要', initialSortOrder: -1, isNumber: true },
-      { label: 'メソッド数', initialSortOrder: -1, isNumber: true },
-      { label: 'メソッド概要', initialSortOrder: -1, isNumber: true }
+      { label: 'クラス名', initialSortOrder: 1, sortPriorities: [0] },
+      { label: 'クラス概要', initialSortOrder: -1, sortPriorities: [1, 3, 2, 0], isNumber: true },
+      { label: 'メソッド数', initialSortOrder: -1, sortPriorities: [2, 3, 1, 0], isNumber: true },
+      { label: 'メソッド概要', initialSortOrder: -1, sortPriorities: [3, 1, 2, 0], isNumber: true }
     ],
     gridData: entries.map(entry => {
       const noDoc = entry.total_chars_of_class_description === 0 && entry.total_chars_of_method_descriptions === 0;
