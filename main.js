@@ -104,14 +104,22 @@ const demo = new Vue({
     })
   },
   created: function () {
-    this.searchQuery = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
-    this.debouncedSetSearchQuery = _.debounce(() => {
-      location.hash = encodeURIComponent(this.searchQuery);
-    }, 500);
+    this.onHashChanged();
+    window.addEventListener("hashchange", this.onHashChanged, false);
+    this.debouncedOnSearchQueryChanged = _.debounce(this.onSearchQueryChanged, 500);
   },
   watch: {
     searchQuery: function () {
-      this.debouncedSetSearchQuery();
+      this.debouncedOnSearchQueryChanged();
+    }
+  },
+  methods: {
+    onHashChanged: function () {
+      this.searchQuery = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
+    },
+    onSearchQueryChanged: function () {
+      location.hash = encodeURIComponent(this.searchQuery);
+      document.title = this.searchQuery || 'rails-class-table';
     }
   }
 });
