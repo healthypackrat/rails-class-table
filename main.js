@@ -90,10 +90,10 @@ const demo = new Vue({
     hideNoDoc: true,
     gridColumns: [
       { label: 'クラス名', initialSortOrder: 1, sortPriorities: [0] },
-      { label: 'クラス概要', initialSortOrder: -1, sortPriorities: [1, 3, 2, 0], isNumber: true },
-      { label: 'メソッド数', initialSortOrder: -1, sortPriorities: [2, 3, 1, 0], isNumber: true },
-      { label: 'メソッド概要', initialSortOrder: -1, sortPriorities: [3, 1, 2, 0], isNumber: true },
-      { label: '合計', initialSortOrder: -1, sortPriorities: [4, 3, 1, 2, 0], isNumber: true }
+      { label: 'クラス概要', initialSortOrder: -1, sortPriorities: [1, 3, 2, 0], isNumber: true, style: { width: '8em'} },
+      { label: 'メソッド数', initialSortOrder: -1, sortPriorities: [2, 3, 1, 0], isNumber: true, style: { width: '8em'} },
+      { label: 'メソッド概要', initialSortOrder: -1, sortPriorities: [3, 1, 2, 0], isNumber: true, style: { width: '9em'} },
+      { label: '合計', initialSortOrder: -1, sortPriorities: [4, 3, 1, 2, 0], isNumber: true, style: { width: '5em'} }
     ],
     gridData: entries.map(entry => {
       const noDoc = entry.total_chars_of_class_description === 0 && entry.total_chars_of_method_descriptions === 0;

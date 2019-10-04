@@ -15,7 +15,8 @@
             <tr>
               <th v-for="(column, index) in columns"
                 @click="sortBy(index)"
-                :class="tableHeaderClassNames(column, index)">
+                :class="tableHeaderClassNames(column, index)"
+                :style="column.style">
                 {{ column.label }}
                 <span class="dropdown-toggle"></span>
               </th>
