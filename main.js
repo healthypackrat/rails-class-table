@@ -17,7 +17,7 @@ Vue.component('demo-grid', {
   computed: {
     sortedData: function () {
       const sortIndex = this.sortIndex;
-      const order = this.sortOrders[sortIndex];
+      const sortOrders = this.sortOrders;
       const sortPriorities = this.columns[sortIndex].sortPriorities;
 
       return this.mutableData.slice().sort((a, b) => {
@@ -25,6 +25,7 @@ Vue.component('demo-grid', {
           const j = sortPriorities[i];
           const x = a[j].value;
           const y = b[j].value;
+          const order = sortOrders[j];
           if (x < y) {
             return -1 * order;
           } else if (x > y) {
