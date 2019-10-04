@@ -92,7 +92,8 @@ const demo = new Vue({
       { label: 'クラス名', initialSortOrder: 1, sortPriorities: [0] },
       { label: 'クラス概要', initialSortOrder: -1, sortPriorities: [1, 3, 2, 0], isNumber: true },
       { label: 'メソッド数', initialSortOrder: -1, sortPriorities: [2, 3, 1, 0], isNumber: true },
-      { label: 'メソッド概要', initialSortOrder: -1, sortPriorities: [3, 1, 2, 0], isNumber: true }
+      { label: 'メソッド概要', initialSortOrder: -1, sortPriorities: [3, 1, 2, 0], isNumber: true },
+      { label: '合計', initialSortOrder: -1, sortPriorities: [4, 3, 1, 2, 0], isNumber: true }
     ],
     gridData: entries.map(entry => {
       const noDoc = entry.total_chars_of_class_description === 0 && entry.total_chars_of_method_descriptions === 0;
@@ -100,7 +101,8 @@ const demo = new Vue({
         { value: entry.class_name, href: `https://api.rubyonrails.org/${entry.path}`, noDoc: noDoc },
         { value: entry.total_chars_of_class_description },
         { value: entry.number_of_methods },
-        { value: entry.total_chars_of_method_descriptions }
+        { value: entry.total_chars_of_method_descriptions },
+        { value: entry.total_chars_of_class_description + entry.total_chars_of_method_descriptions }
       ];
     })
   },
