@@ -1,3 +1,7 @@
+React/Reduxで書き直したのでこちらを使ってください:
+
+  * <https://github.com/healthypackrat/rails-class-table-v2>
+
 # これは何?
 
 RailsのAPIドキュメントにあるクラスの概要
